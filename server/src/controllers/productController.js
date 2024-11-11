@@ -3,6 +3,7 @@ import {
   DetailService,
   ListByBrandServices,
   ListByCategoryServices,
+  ListByFilterService,
   ListByKeywordService,
   ListByRemarkServices,
   ListBySliderService,
@@ -44,6 +45,10 @@ export const productReviewListById = async (req, res) => {
   return res.json(result);
 };
 
+export const productListByFilter = async (req, res) => {
+  const result = await ListByFilterService(req);
+  return res.json(result);
+};
 
 export const createProductReview = async (req, res) => {
   try {

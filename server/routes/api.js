@@ -50,6 +50,7 @@ router.get(
   "/productReviewListById/:productID",
   productController.productReviewListById
 );
+router.post("/productListByFilter", productController.productListByFilter);
 
 // === Review Routes ===
 router.post("/createProductReview", productController.createProductReview);

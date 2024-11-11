@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../../assets/images/plainb-logo.svg";
 const Navbar = () => {
+  const [keyword, setKeyword] = useState("");
   return (
     <>
       <div className="container-fluid text-white p-2 bg-success">
@@ -43,7 +44,7 @@ const Navbar = () => {
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#nav06"
-            ariacontrols="nav06"
+            aria-controls="nav06"
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
@@ -62,11 +63,17 @@ const Navbar = () => {
             <div className="input-group">
               <input
                 className="form-control"
+                value={keyword}
+                onChange={(e) => setKeyword(e.target.value)}
                 type="search"
                 placeholder="Search"
                 aria-label="Search"
               />
-              <button className="btn btn-outline-dark" type="submit">
+              <Link
+                to={keyword.length > 0 ? `/by-keyword/${keyword}` : "/"}
+                className="btn btn-outline-dark"
+                type="submit"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -81,7 +88,7 @@ const Navbar = () => {
                     d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
                   />
                 </svg>
-              </button>
+              </Link>
             </div>
             <Link
               to="/cart"

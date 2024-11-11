@@ -6,7 +6,7 @@ const ProductStore = create((set) => ({
   BrandList: null,
   BrandListRequest: async () => {
     const res = await axios.get(`/api/brandList`);
-    if (res.status === 200) {
+    if (res.data.status === "Successful") {
       set({ BrandList: res.data["data"] });
     }
   },
@@ -15,7 +15,7 @@ const ProductStore = create((set) => ({
   CategoriesList: null,
   CategoriesListRequest: async () => {
     const res = await axios.get(`/api/categoryList`);
-    if (res.status === 200) {
+    if (res.data.status === "Successful") {
       set({ CategoriesList: res.data["data"] });
     }
   },
@@ -24,7 +24,7 @@ const ProductStore = create((set) => ({
   SliderList: null,
   SliderListRequest: async () => {
     const res = await axios.get(`/api/productListBySlide`);
-    if (res.status === 200) {
+    if (res.data.status === "Successful") {
       set({ SliderList: res.data["data"] });
     }
   },
@@ -33,8 +33,33 @@ const ProductStore = create((set) => ({
   ProductListByRemark: null,
   ProductListByRemarkRequest: async (remark) => {
     const res = await axios.get(`/api/productListByRemark/${remark}`);
-    if (res.status === 200) {
+    if (res.data.status === "Successful") {
       set({ ProductListByRemark: res.data["data"] });
+    }
+  },
+
+  //==> Storing ProductList by Brand
+  ProductList: null,
+  ListByBrandRequest: async (brandId) => {
+    const res = await axios.get(`/api/productListByBrand/${brandId}`);
+    if (res.data.status === "Successful") {
+      set({ ProductList: res.data["data"] });
+    }
+  },
+
+  //==> Storing ProductList by Category
+  ListByCategoryRequest: async (categoryId) => {
+    const res = await axios.get(`/api/productListByCategory/${categoryId}`);
+    if (res.data.status === "Successful") {
+      set({ ProductList: res.data["data"] });
+    }
+  },
+
+  //==> Storing ProductList by Keyword
+  ListByKeywordRequest: async (keyword) => {
+    const res = await axios.get(`/api/productListByKeyword/${keyword}`);
+    if (res.data.status === "Successful") {
+      set({ ProductList: res.data["data"] });
     }
   },
 }));

@@ -300,8 +300,82 @@ export const ListByKeywordService = async (req) => {
     if (data.length > 0) {
       return { status: "Successful", data: data };
     } else {
-      return { status: "Successful", data: "No data found on this keyword" };
+      return { status: "Successful", data: [] };
     }
+  } catch (err) {
+    return { status: "Failed", data: err.toString() };
+  }
+};
+
+// Function to get product by Filter
+export const ListByFilterService = async (req) => {
+  try {
+    const matchConditions = {};
+    if (req.body["brandID"]) {
+      matchConditions.brandID = new ObjectId(req.body["brandID"]);
+    }
+    if (req.body["categoryID"]) {
+      matchConditions.categoryID = new ObjectId(req.body["categoryID"]);
+    }
+    const MatchStage = { $match: matchConditions };
+
+    const AddFieldStage = {
+      $addFields: { numericPrice: { $toInt: "$price" } },
+    };
+
+    const maxPrice = parseInt(req.body["maxPrice"]);
+    const minPrice = parseInt(req.body["minPrice"]);
+    const priceMatchConditions = {};
+    if (!isNaN(minPrice)) {
+      priceMatchConditions["numericPrice"] = { $gte: minPrice };
+    }
+    if (!isNaN(maxPrice)) {
+      priceMatchConditions["numericPrice"] = {
+        ...(priceMatchConditions["numericPrice"] || {}),
+        $lte: maxPrice,
+      };
+    }
+    const PriceMatchStage = { $match: priceMatchConditions };
+
+    const JoinWithBrandStage = {
+      $lookup: {
+        from: "brands",
+        localField: "brandID",
+        foreignField: "_id",
+        as: "brand",
+      },
+    };
+    const JoinWithCategoryStage = {
+      $lookup: {
+        from: "categories",
+        localField: "categoryID",
+        foreignField: "_id",
+        as: "category",
+      },
+    };
+    const UnwindBrandStage = { $unwind: "$brand" };
+    const UnwindCategoryStage = { $unwind: "$category" };
+    const ProjectionStage = {
+      $project: {
+        "brand._id": 0,
+        "category._id": 0,
+        "details._id": 0,
+        brandID: 0,
+        categoryID: 0,
+      },
+    };
+
+    const data = await ProductModel.aggregate([
+      MatchStage,
+      AddFieldStage,
+      PriceMatchStage,
+      JoinWithBrandStage,
+      JoinWithCategoryStage,
+      UnwindBrandStage,
+      UnwindCategoryStage,
+      ProjectionStage,
+    ]);
+    return { status: "Successful", data: data };
   } catch (err) {
     return { status: "Failed", data: err.toString() };
   }
