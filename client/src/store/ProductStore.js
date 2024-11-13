@@ -41,6 +41,7 @@ const ProductStore = create((set) => ({
   //==> Storing ProductList by Brand
   ProductList: null,
   ListByBrandRequest: async (brandId) => {
+    set({ ProductList: null });
     const res = await axios.get(`/api/productListByBrand/${brandId}`);
     if (res.data.status === "Successful") {
       set({ ProductList: res.data["data"] });
@@ -49,6 +50,7 @@ const ProductStore = create((set) => ({
 
   //==> Storing ProductList by Category
   ListByCategoryRequest: async (categoryId) => {
+    set({ ProductList: null });
     const res = await axios.get(`/api/productListByCategory/${categoryId}`);
     if (res.data.status === "Successful") {
       set({ ProductList: res.data["data"] });
@@ -57,9 +59,37 @@ const ProductStore = create((set) => ({
 
   //==> Storing ProductList by Keyword
   ListByKeywordRequest: async (keyword) => {
+    set({ ProductList: null });
     const res = await axios.get(`/api/productListByKeyword/${keyword}`);
     if (res.data.status === "Successful") {
       set({ ProductList: res.data["data"] });
+    }
+  },
+
+  //==> Storing ProductList by Filter
+  ListByKeywordRequest: async (filterObj) => {
+    set({ ProductList: null });
+    const res = await axios.post(`/api/productListByFilter`, filterObj);
+    if (res.data.status === "Successful") {
+      set({ ProductList: res.data["data"] });
+    }
+  },
+
+  //==> Storing Product Details
+  ProductDetails: null,
+  ProductDetailsRequest: async (id) => {
+    const res = await axios.get(`/api/productDetailsById/${id}`);
+    if (res.data.status === "Successful") {
+      set({ ProductDetails: res.data["data"] });
+    }
+  },
+
+  //==> Storing Product Review List
+  ReviewList: null,
+  ReviewListRequest: async (id) => {
+    const res = await axios.get(`/api/productReviewListById/${id}`);
+    if (res.data.status === "Successful") {
+      set({ ReviewList: res.data["data"] });
     }
   },
 }));

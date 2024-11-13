@@ -4,6 +4,7 @@ import HomePage from "./pages/HomePage";
 import ListByBrand from "./pages/ListByBrand";
 import ListByCategory from "./pages/ListByCategory";
 import ListByKeyword from "./pages/ListByKeyword";
+import ProductDetailsPage from "./pages/ProductDetailsPage";
 
 const App = () => {
   return (
@@ -12,6 +13,10 @@ const App = () => {
       <Route path="/by-brand/:brandId" element={<ListByBrand />} />
       <Route path="/by-category/:categoryId" element={<ListByCategory />} />
       <Route path="/by-keyword/:keyword" element={<ListByKeyword />} />
+      <Route
+        path="/product-details/:productId"
+        element={<ProductDetailsPage />}
+      />
     </Routes>
   );
 };
