@@ -1,6 +1,6 @@
 export const PORT = 5050;
 export const DATABASE_URI =
-  "mongodb+srv://nhmnazmul22:z5BpbhJUj3MAtFf5@cluster0.mnssu.mongodb.net/Mern-Ecommerce";
+  "mongodb+srv://nhmnazmul22:nhmnazmul22@cluster0.mnssu.mongodb.net/Mern-Ecommerce";
 export const JWT_KEY = "IjD5WURrpGGDWAvl3iHdjfmWQMeNFZQW4lSYIxa4NSw";
 export const JWT_EXPIRED_TIME = 30 * 24 * 60 * 60;
 

@@ -11,7 +11,7 @@ const Features = () => {
     return (
       <div className="container section">
         <div className="row">
-          {FeatureList.map((features) => (
+          {FeatureList.map((features, i) => (
             <div
               key={features._id}
               className="col-6 p-2 col-md-3 col-lg-3 col-sm-6"
@@ -20,7 +20,7 @@ const Features = () => {
                 <div className="card-body">
                   <div className="row">
                     <div className="col-3">
-                      <img className="w-100" src="" />
+                      <img className="w-100" src={features.img} />
                     </div>
                     <div className="col-9">
                       <h3 className="bodyXLarge">{features.name}</h3>

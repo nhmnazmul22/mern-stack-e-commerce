@@ -9,6 +9,15 @@ const FeatureStore = create((set) => ({
       set({ FeatureList: res.data["data"] });
     }
   },
+
+  LegalDataList: null,
+  LegalDataRequest: async (type) => {
+    set({ LegalDataList: null });
+    const res = await axios.get(`/api/legals/${type}`);
+    if (res.data.status === "Successful") {
+      set({ LegalDataList: res.data["data"] });
+    }
+  },
 }));
 
 export default FeatureStore;

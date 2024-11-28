@@ -48,7 +48,7 @@ const Slider = () => {
                         </Link>
                       </div>
                       <div className="col-12 col-lg-5 col-sm-12 col-md-5 p-5">
-                        <img src="" className="w-100" alt="..." />
+                        <img src={slider.image} className="w-100" alt="..." />
                       </div>
                     </div>
                   </div>

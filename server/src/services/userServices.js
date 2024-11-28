@@ -28,7 +28,7 @@ export const LoginService = async (req) => {
 };
 
 // User Login Verify Service Function
-export const LoginVerifyService = async (req) => {
+export const LoginVerifyService = async (req, res) => {
   try {
     const { email, otp } = req.body;
     const data = await UserModel.find({ email: email, otp: otp });
@@ -39,6 +39,14 @@ export const LoginVerifyService = async (req) => {
         otp: otp,
       });
       const token = TokenEncoded(userData["_id"], email);
+
+      // Adding token in the cookie
+      res.cookie("token", token, {
+        expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30), // 30 days
+        httpOnly: true, // Secure and can't be accessed via JavaScript
+        // secure: true, // Uncomment this line in a production environment with HTTPS
+        sameSite: "Strict", // Prevents CSRF attacks
+      });
 
       return {
         status: "Successful",

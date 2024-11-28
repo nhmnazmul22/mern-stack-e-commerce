@@ -27,7 +27,7 @@ const Categories = () => {
                   className="card h-100 rounded-3 bg-white"
                 >
                   <div className="card-body">
-                    <img alt="" className="w-75" src="" />
+                    <img alt="" className="w-75" src={categories.categoryImg} />
                     <p className="bodySmal mt-3">{categories.categoryName}</p>
                   </div>
                 </Link>

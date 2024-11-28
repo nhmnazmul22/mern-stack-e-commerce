@@ -128,7 +128,10 @@ const ProductList = () => {
                         to={`/product-details/${product._id}`}
                         className="card shadow-sm h-100 rounded-3 bg-white"
                       >
-                        <img className="w-100 rounded-top-2" src="" />
+                        <img
+                          className="w-100 rounded-top-2"
+                          src={product.image}
+                        />
                         <div className="card-body">
                           <p className="bodySmall text-secondary my-1">
                             {product.title}

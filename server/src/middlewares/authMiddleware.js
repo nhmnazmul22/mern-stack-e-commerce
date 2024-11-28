@@ -3,7 +3,16 @@ import { TokenDecoded } from "../utility/tokenUtility.js";
 
 // Middleware for verifying JWT token
 export const AuthMiddleware = (req, res, next) => {
-  const token = req.headers["token"];
+  // Check if token is in headers or cookies
+  let token = null;
+  if (req.headers["token"]) {
+    token = req.headers["token"];
+  }
+  // If token not found in headers, try cookies
+  if (!token) {
+    token = req.cookies["token"];
+  }
+
   // Decode the token
   const decodedToken = TokenDecoded(token);
 

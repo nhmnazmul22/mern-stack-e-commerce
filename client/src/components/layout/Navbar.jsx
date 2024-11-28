@@ -104,7 +104,7 @@ const Navbar = () => {
             >
               <i className="bi text-dark bi-heart"></i>
             </Link>
-            <Link
+            {/* <Link
               type="button"
               className="btn ms-3 btn-success d-flex"
               to="/profile"
@@ -117,6 +117,13 @@ const Navbar = () => {
               to="/profile"
             >
               Logout
+            </Link> */}
+            <Link
+              type="button"
+              className="btn ms-3 btn-success d-flex"
+              to="/login"
+            >
+              Login
             </Link>
           </div>
         </div>

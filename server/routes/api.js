@@ -23,6 +23,8 @@ router.get("/categoryList", categoriesController.categoryList);
 
 // === Feature Routes ===
 router.get("/features", featuresController.featuresList);
+router.get("/legals/:type", featuresController.legalDetails);
+
 
 // === Product Routes ===
 router.get(

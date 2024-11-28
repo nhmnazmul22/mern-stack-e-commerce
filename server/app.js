@@ -1,4 +1,5 @@
 // === External Imports ===
+import cookieParser from "cookie-parser";
 import cors from "cors";
 import express from "express";
 import rateLimit from "express-rate-limit";
@@ -25,9 +26,11 @@ app.use(express.json());
 app.use(cors());
 app.use(helmet());
 app.use(limiter);
-app.use("/api", router);
-
+app.use(cookieParser());
 app.use(express.static("../client/dist"));
+
+// === Routes ===
+app.use("/api", router);
 
 // Add React Front End Routing
 app.get("*", function (req, res) {

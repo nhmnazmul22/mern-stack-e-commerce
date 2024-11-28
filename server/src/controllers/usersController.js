@@ -12,7 +12,7 @@ export const login = async (req, res) => {
 };
 
 export const loginVerify = async (req, res) => {
-  const result = await LoginVerifyService(req);
+  const result = await LoginVerifyService(req, res);
   return res.json(result);
 };
 
