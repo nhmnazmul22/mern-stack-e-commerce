@@ -66,15 +66,6 @@ const ProductStore = create((set) => ({
     }
   },
 
-  //==> Storing ProductList by Filter
-  ListByKeywordRequest: async (filterObj) => {
-    set({ ProductList: null });
-    const res = await axios.post(`/api/productListByFilter`, filterObj);
-    if (res.data.status === "Successful") {
-      set({ ProductList: res.data["data"] });
-    }
-  },
-
   //==> Storing Product Details
   ProductDetails: null,
   ProductDetailsRequest: async (id) => {
